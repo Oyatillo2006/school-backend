@@ -11,6 +11,7 @@
                 box-sizing: border-box;
                 font-family: sans-serif;
             }
+
             body {
                 width: 100vw;
                 height: 100vh;
@@ -50,11 +51,11 @@
                 padding: 10px;
                 border-radius: 10px;
                 transition: 0.4s;
-
             }
 
             .form__title a:hover {
                 box-shadow: 0px 0px 10px 2px orange;
+
             }
 
             .form__title h4 {
@@ -303,10 +304,16 @@
             }
 
             .buttons .left {
-                width: 42%;
+                width: 20%;
                 display: flex;
                 justify-content: space-between;
             }
+
+            .buttons .right {
+                width: 40%;
+                display: flex;
+                justify-content: space-between;
+             }
 
             .cancel {
                 padding: 10px 20px;
@@ -335,28 +342,19 @@
                 transition: 0.4s;
             }
 
-            .save:hover {
-                cursor: pointer;
-            }
-
-            .del {
-                padding: 10px 20px;
-                border-radius: 10px;
-                border: 1px solid red;
-                font-size: 1.2em;
-                color: red;
-                transition: 0.4s;
-            }
-
             input[type="number"]::-webkit-inner-spin-button {
                 display: none;
+            }
+
+            .save:hover {
+                cursor: pointer;
             }
 
         </style>
     </head>
     <body>
         <div class="container">
-            <form action="/teacheredit_after/{{teacher.id}}/" method="POST">
+            <form action="/teacheradd_after/" method="POST">
                 {% csrf_token %}
                 <div class="form__container">
                     <div class="form__title">
@@ -366,26 +364,26 @@
 
                     <div class="form__fullname">
                         <div class="form__name">
-                            <input type="text" name="first_name" value="{{teacher.first_name}}" />
+                            <input type="text" name="first_name" required />
                             <span>First Name</span>
                         </div>
                         <div class="form__firstname">
-                            <input type="text" name="last_name" value="{{teacher.last_name}}" />
-                            <span>Familiya</span>
+                            <input type="text" name="last_name" required/>
+                            <span>Last Name</span>
                         </div>
                     </div>
 
                     <div class="form-subject__tel">
                         <div class="form__subject">
                             <select name="subject">
-                                <option>{{teacher.subject}}</option>
+                                <option>Subject</option>
                                 {% for subject in subjects %}
                                 <option>{{subject.name}}</option>
                                 {% endfor %}
                             </select>
                             <span>Subject</span>
                             <div class="form__tel">
-                                <input type="text" name="phone" value="{{teacher.phone}}" />
+                                <input type="text" name="phone" required/>
                                 <span>Tel:</span>
                             </div>
                         </div>
@@ -393,23 +391,24 @@
 
                     <div class="form__age-gender">
                         <div class="form__age">
-                            <input type="number" name="age" value="{{teacher.age}}" />
+                            <input type="number" name="age" required/>
                             <span>Age</span>
                         </div>
                         <div class="form__gender">
-                            <select name="gender">
-                                <option>{{teacher.gender}}</option>
-                                {% if teacher.gender == "male" %}
-                                <option>female</option>
-                                {% else %}
+                            <select name="gender" id="#">
+                                <option>Gender</option>
                                 <option>male</option>
-                                {% endif %}
+                                <option>female</option>
                             </select>
                             <span>Gender</span>
                         </div>
                     </div>
                     <div class="buttons">
                         <div class="left">
+
+
+                        </div>
+                        <div class="right">
                             <a href="#"
                                 ><button type="reset" class="cancel">
                                     reset
@@ -420,9 +419,6 @@
                                     save
                                 </button></a
                             >
-                        </div>
-                        <div class="right">
-                            <a href="/teacher-del/{{teacher.id}}/"><div class="del">delete</div></a>
                         </div>
                     </div>
                 </div>

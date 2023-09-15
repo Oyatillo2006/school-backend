@@ -32,7 +32,7 @@ class Teacher(models.Model):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     age = models.PositiveIntegerField(blank=True, null=True)
-    subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
+    subject = models.ForeignKey(Subject, on_delete=models.CASCADE, null=True, blank=True)
     gender = models.CharField(max_length=6,choices=GENDER)
     phone = models.CharField(max_length=13, blank=True, null=True)
 

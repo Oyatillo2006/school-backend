@@ -14,7 +14,11 @@
 
             body {
                 background: lightblue;
-                overflow: hidden;
+                overflow-x: hidden;
+            }
+
+            body::-webkit-scrollbar {
+              display: none;
             }
 
             .container {
@@ -111,12 +115,17 @@
                 padding-right: 30px;
             }
 
+
+
             .add a {
                 color: orange;
                 font-size: 1.4em;
                 padding: 10px;
                 background-color: rgb(34, 0, 65);
                 border-radius: 10px;
+            }
+
+
         </style>
     </head>
     <body>
@@ -135,14 +144,14 @@
                 </div>
             </div>
             <div class="content">
-                <div class="add"><a href="#">+Add</a></div>
+                <div class="add"><a href="/teacher-add/">+Add</a></div>
                 <table
                     border="1"
                     style="border-collapse: collapse"
                     width="100%"
                 >
                     <tr>
-                        <th>№</th>
+                        <th>ID</th>
                         <th>First Name</th>
                         <th>Last Name</th>
                         <th>Age</th>
@@ -154,17 +163,18 @@
                     <tr>
                         <td>{{teacher.id}}</td>
                         <td>
-                            <a href="/teacher-edit/{{teacher.id}}" class="name">
-                                <div>
-                                    {{teacher.first_name}}
-                                </div>
-                            </a>
+                            {{teacher.first_name}}
                         </td>
                         <td>{{teacher.last_name}}</td>
                         <td>{{teacher.age}}</td>
                         <td>{{teacher.subject}}</td>
                         <td>{{teacher.gender}}</td>
                         <td>{{teacher.phone}}</td>
+                        <td>
+                            <a href="/teacher-edit/{{teacher.id}}" class="edit">Edit</a>
+                        </td>
+
+                        </td>
                     </tr>
                     {% endfor %}
                 </table>
