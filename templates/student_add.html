@@ -144,18 +144,8 @@
                 position: relative;
             }
 
-            .form__subject span {
-                position: absolute;
-                left: 14px;
-                padding: 10px;
-                color: rgb(53, 255, 255);
-                top: -6px;
-                font-size: 0.7em;
-                padding: 0px 10px;
-                background-color: rgb(34, 0, 65);
-            }
 
-            .form__subject select {
+            .form__subject > input {
                 width: 70%;
                 padding: 10px 17px;
                 border-radius: 7px;
@@ -164,13 +154,30 @@
                 outline: none;
                 color: rgba(255, 255, 255, 0.5);
                 font-size: 1em;
-                cursor: pointer;
                 transition: 0.4s;
             }
 
-            .form__subject select option {
+            .form__subject > span {
+                position: absolute;
+                top: 1px;
+                left: 10px;
+                padding: 10px;
+                pointer-events: none;
+                font-size: 1em;
                 color: rgba(255, 255, 255, 0.5);
+                transition: 0.4s;
             }
+
+            .form__subject > input:valid ~ span,
+            .form__subject > input:focus ~ span {
+                color: rgb(53, 255, 255);
+                top: -5px;
+                left: 20px;
+                font-size: 0.7em;
+                padding: 0px 10px;
+                background-color: rgb(34, 0, 65);
+            }
+
 
             .form__tel {
                 position: relative;
@@ -354,12 +361,12 @@
     </head>
     <body>
         <div class="container">
-            <form action="/teacheradd_after/" method="POST">
+            <form action="/studentadd_after/" method="POST">
                 {% csrf_token %}
                 <div class="form__container">
                     <div class="form__title">
                         <a href="/teacher/">< Back</a>
-                        <h4>Add</h4>
+                        <h4>Edit</h4>
                     </div>
 
                     <div class="form__fullname">
@@ -375,13 +382,8 @@
 
                     <div class="form-subject__tel">
                         <div class="form__subject">
-                            <select name="subject">
-                                <option>Subject</option>
-                                {% for subject in subjects %}
-                                <option>{{subject.name}}</option>
-                                {% endfor %}
-                            </select>
-                            <span>Subject</span>
+                            <input type="number" name="grade" required>
+                            <span>Grade</span>
                             <div class="form__tel">
                                 <input type="text" name="phone" required/>
                                 <span>Tel:</span>

@@ -16,10 +16,10 @@ class Student(models.Model):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     age = models.PositiveIntegerField(blank=True, null=True)
-    grade = models.PositiveSmallIntegerField()
+    grade = models.PositiveSmallIntegerField(max_length=2)
     gender = models.CharField(max_length=6, choices=GENDER)
     phone = models.CharField(max_length=13,blank=True, null=True)
-
+    # 1236699
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 

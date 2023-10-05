@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Teacher, Subject
+from .models import Teacher, Subject, Student
 
 def home(request):
 
@@ -8,22 +8,7 @@ def home(request):
 def teacher(request):
     context = {
         "teachers": list(Teacher.objects.all()),
-        "len": len(Teacher.objects.all()),
-        "num":[]
     }
-
-    date = {
-        "info": {}
-    }
-
-    for i in range(1, context["len"]+1):
-        context["num"].append(i)
-    print(context["teachers"])
-    print(context["num"])
-
-    for i in range(context["len"]):
-        date["info"].update({context["num"][i] : context["teachers"][i]})
-    print(date["info"])
 
     return render(request, "teacher.html", context)
 
@@ -81,3 +66,37 @@ def teacheredit_after(request,d):
         teacher.gender = gender
         teacher.save()
         return redirect("/teacher/")
+
+
+def student(request):
+        context = {
+            "students": list(Student.objects.all()),
+        }
+
+        return render(request, "student.html", context)
+
+def student_add(request):
+
+    return render(request, "student_add.html")
+
+
+def studentadd_after(request):
+    if request.POST:
+        f_name = request.POST.get("first_name")
+        l_name = request.POST.get("last_name")
+        grade = request.POST.get("grade")
+        age = request.POST.get("age")
+        phone = request.POST.get("phone")
+        gender = request.POST.get("gender")
+
+        Student.objects.create(first_name=f_name, last_name=l_name, grade=grade, phone=phone, age=age,
+                               gender=gender)
+
+        return redirect("/student/")
+
+def student(request,id):
+    context = {
+        "student": Teacher.objects.get(id=id),
+    }
+
+    return render(request, "student-edit.html", context)

@@ -14,7 +14,11 @@
 
             body {
                 background: lightblue;
-                overflow: hidden;
+                overflow-x: hidden;
+            }
+
+            body::-webkit-scrollbar {
+              display: none;
             }
 
             .container {
@@ -92,6 +96,36 @@
             .active {
                 color: orange;
             }
+
+            td,th {
+                padding: 10px 10px;
+                font-size: 1.2em;
+            }
+
+            .name {
+                width: 100%;
+                height: 100%;
+            }
+
+            .add {
+                width: 100%;
+                height: 50px;
+                text-align: right;
+                color: orange;
+                padding-right: 30px;
+            }
+
+
+
+            .add a {
+                color: orange;
+                font-size: 1.4em;
+                padding: 10px;
+                background-color: rgb(34, 0, 65);
+                border-radius: 10px;
+            }
+
+
         </style>
     </head>
     <body>
@@ -102,20 +136,48 @@
                 </div>
                 <div class="nav">
                     <ul>
-                        <a href=""><li class="active">Home</li></a>
+                        <a href="/home/"><li>Home</li></a>
                         <a href="/teacher/"><li>Teacher</li></a>
-                        <a href="/student/"><li>Students</li></a>
-                        <a href="/subject/"><li>Subjects</li></a>
+                        <a href="/student"><li class="active">Students</li></a>
+                        <a href="/subject"><li>Subjects</li></a>
                     </ul>
                 </div>
             </div>
             <div class="content">
-                <img
-                    src="https://www.ibnsino-maktab.uz/wp-content/uploads/2021/10/2-1536x850.jpg"
-                    alt="school photo"
-                    title="Maktab"
+                <div class="add"><a href="/student-add/">+Add</a></div>
+                <table
+                    border="1"
+                    style="border-collapse: collapse"
                     width="100%"
-                />
+                >
+                    <tr>
+                        <th>ID</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Age</th>
+                        <th>Subject</th>
+                        <th>Gender</th>
+                        <th>Phone</th>
+                    </tr>
+                    {% for student in students %}
+                    <tr>
+                        <td>{{student.id}}</td>
+                        <td>
+                            {{student.first_name}}
+                        </td>
+                        <td>{{student.last_name}}</td>
+                        <td>{{student.age}}</td>
+                        <td>{{student.subject}}</td>
+                        <td>{{student.gender}}</td>
+                        <td>{{student.phone}}</td>
+                        <td>
+                            <a href="/student-edit/{{student.id}}" class="edit">Edit</a>
+                        </td>
+
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
             </div>
         </div>
     </body>
